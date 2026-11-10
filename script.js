@@ -10,15 +10,28 @@ function addGift() {
     const giftList = document.getElementById('giftList');
     const li = document.createElement('li');
     
-    // Создаем элемент списка
     li.innerHTML = `
-        <span>${giftText}</span>
+        <div class="gift-content">
+            <input type="checkbox" class="bought-checkbox" onchange="toggleBought(this)">
+            <span class="gift-text">${giftText}</span>
+        </div>
         <button class="delete-btn" onclick="this.parentElement.remove()">Удалить</button>
     `;
     
     giftList.appendChild(li);
 
-    // Очищаем поле ввода
     giftInput.value = "";
     giftInput.focus();
+}
+
+function toggleBought(checkbox) {
+    const giftText = checkbox.nextElementSibling;
+    
+    if (checkbox.checked) {
+        giftText.style.textDecoration = "line-through";
+        giftText.style.color = "gray";
+    } else {
+        giftText.style.textDecoration = "none";
+        giftText.style.color = "black";
+    }
 }
